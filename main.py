@@ -19,6 +19,7 @@ def sleepTime():
     pt.moveRel(-100, 0)
     pt.click()
 
+#Whatsapp
 def getZapMessage():
     paperclip = pt.locateOnScreen("whatsapp/smiley_paperclip.png")
     pt.moveTo(paperclip, duration=.5)
@@ -27,16 +28,6 @@ def getZapMessage():
     pt.hotkey('ctrl', 'c')
     zapMessage = pyperclip.paste()
     return zapMessage
-
-def getTGMessage():
-    paperclip = pt.locateOnScreen("telegram/smiley.png")
-    pt.moveTo(paperclip[0] - 10, paperclip[1]+ 10, duration=.5)
-    pt.moveRel(60, -60, duration=.5)
-    pt.tripleClick()
-    pt.hotkey('ctrl', 'c')
-    tgMessage = pyperclip.paste()
-    return tgMessage
-
 def answerZapMessage(message):
     paperclip = pt.locateOnScreen("whatsapp/smiley_paperclip.png")
     pt.moveTo(paperclip, duration=.5)
@@ -47,6 +38,15 @@ def answerZapMessage(message):
     elif message == "default":
         pt.typewrite("Cool, bro!")
 
+#Telegram
+def getTGMessage():
+    paperclip = pt.locateOnScreen("telegram/smiley.png")
+    pt.moveTo(paperclip[0] - 10, paperclip[1]+ 10, duration=.5)
+    pt.moveRel(60, -60, duration=.5)
+    pt.tripleClick()
+    pt.hotkey('ctrl', 'c')
+    tgMessage = pyperclip.paste()
+    return tgMessage
 def answerTGMessage(message):
     paperclip = pt.locateOnScreen("telegram/smiley.png")
     pt.moveTo(paperclip, duration=.5)
@@ -57,12 +57,16 @@ def answerTGMessage(message):
     elif message == "default":
         pt.typewrite("Cool, bro!")
 
+#Validação de Mensagens
+#Message Validation
 def validateMessage(message):
     if "hello" in str(message).lower():
         return "hello"
     else:
         return "default"
 
+#Checagem contínua de novas mensagens
+#Continuously checking for new messages
 def checkNewMessages():
     while True:
         if pt.locateOnScreen("telegram/green_ball.png", confidence=.7) is not None:
@@ -81,4 +85,4 @@ def checkNewMessages():
             print("no new messages!")
             sleep(3)
 
-#checkNewMessages()
+checkNewMessages()
