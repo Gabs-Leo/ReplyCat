@@ -1,15 +1,28 @@
 import pyautogui as pt
 from time import sleep
 import pyperclip
+import tkinter as tk
 
-sleep(3)
 screenSize = pt.size()
 screenWidth = screenSize[0]
 screenHeight = screenSize[1]
 
+def main():
+    #sleep(3)
+    checkNewMessages()
+
+#Criando Interface para iniciar o bot
+#Working on interface to start the bot
+def windowStart():
+    root = tk.Tk()
+    root.geometry("800x600")
+    root.title("ReplyCat 1.0")
+    root.iconbitmap("16x16.ico")
+    root.mainloop()
+
 #ZzzZzzZ
 def sleepTime():
-    pinZap = pt.locateOnScreen("whatsapp/pin_contact.png")
+    pinZap = pt.locateOnScreen("whatsapp/pin_contact.png", confidence=.7)
     pt.moveTo(pinZap)
     pt.moveRel(-100, 0)
     pt.click()
@@ -37,6 +50,7 @@ def answerZapMessage(message):
         pt.typewrite("Hello :)")
     elif message == "default":
         pt.typewrite("Cool, bro!")
+    sleepTime()
 
 #Telegram
 def getTGMessage():
@@ -56,6 +70,7 @@ def answerTGMessage(message):
         pt.typewrite("Hello :)")
     elif message == "default":
         pt.typewrite("Cool, bro!")
+    sleepTime()
 
 #Validação de Mensagens
 #Message Validation
@@ -85,4 +100,4 @@ def checkNewMessages():
             print("no new messages!")
             sleep(3)
 
-checkNewMessages()
+main()
